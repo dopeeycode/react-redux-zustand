@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Saira', sans-serif;
+  @apply bg-zinc-950
+}
