@@ -2,8 +2,7 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 
 import { ChevronDown } from 'lucide-react'
 import Lesson from './Lesson'
-import { UseAppSelector } from '../../store'
-import { useDispatch } from 'react-redux'
+import { UseAppDispatch, UseAppSelector } from '../../store'
 import { play } from '../../store/slices/player'
 
 interface ModuleProps {
@@ -25,10 +24,10 @@ export default function Module({
   })
 
   const lessons = UseAppSelector((state) => {
-    return state.player.course.modules[moduleIndex].lessons
+    return state.player.course?.modules[moduleIndex].lessons
   })
 
-  const dispatch = useDispatch()
+  const dispatch = UseAppDispatch()
 
   return (
     <Collapsible.Root className="group" defaultOpen={moduleIndex === 0}>
@@ -47,21 +46,22 @@ export default function Module({
 
       <Collapsible.Content>
         <nav className="relative flex flex-col p-6 gap-4">
-          {lessons.map((lesson, lessonIndex) => {
-            const isCurrent =
-              currentModuleIndex === moduleIndex &&
-              currentLessonIndex === lessonIndex
+          {lessons &&
+            lessons.map((lesson, lessonIndex) => {
+              const isCurrent =
+                currentModuleIndex === moduleIndex &&
+                currentLessonIndex === lessonIndex
 
-            return (
-              <Lesson
-                key={lesson.id}
-                title={lesson.title}
-                duration={lesson.duration}
-                onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
-                isCurrent={isCurrent}
-              />
-            )
-          })}
+              return (
+                <Lesson
+                  key={lesson.id}
+                  title={lesson.title}
+                  duration={lesson.duration}
+                  onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
+                  isCurrent={isCurrent}
+                />
+              )
+            })}
         </nav>
       </Collapsible.Content>
     </Collapsible.Root>

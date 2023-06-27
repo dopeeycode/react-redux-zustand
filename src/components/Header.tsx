@@ -3,6 +3,11 @@ import { useCurrentLesson } from '../store/slices/player'
 
 export default function Header() {
   const { currentLesson, currentModule } = useCurrentLesson()
+
+  if (!currentLesson || !currentModule) {
+    return null
+  }
+
   return (
     <header className="flex items-center justify-between ">
       <div className="flex flex-col gap-1">

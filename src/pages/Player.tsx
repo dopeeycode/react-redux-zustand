@@ -1,19 +1,27 @@
 import Header from '../components/Header'
 import VideoPlayer from '../components/Video'
 import Module from '../components/Module'
-import { UseAppSelector } from '../store'
-import { useCurrentLesson } from '../store/slices/player'
+import { UseAppDispatch, UseAppSelector } from '../store'
+import { loadCourse, useCurrentLesson } from '../store/slices/player'
 import { useEffect } from 'react'
 
 export default function Player() {
+  const dispatch = UseAppDispatch()
+
   const modules = UseAppSelector((state) => {
-    return state.player.course.modules
+    return state.player.course?.modules
   })
 
   const { currentLesson } = useCurrentLesson()
 
   useEffect(() => {
-    document.title = `${currentLesson.title}`
+    dispatch(loadCourse())
+  }, [])
+
+  useEffect(() => {
+    if (currentLesson) {
+      document.title = `${currentLesson.title}`
+    }
   }, [currentLesson])
 
   return (
@@ -28,14 +36,15 @@ export default function Player() {
             className="w-80 absolute top-0 bottom-0 right-0 overflow-y-scroll border-l border-zinc-800
            bg-zinc-900 scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800 divide-y-2 divide-zinc-900"
           >
-            {modules.map((module, index) => (
-              <Module
-                key={module.id}
-                moduleIndex={index}
-                title={module.title}
-                amountOfLessons={module.lessons.length}
-              />
-            ))}
+            {modules &&
+              modules.map((module, index) => (
+                <Module
+                  key={module.id}
+                  moduleIndex={index}
+                  title={module.title}
+                  amountOfLessons={module.lessons.length}
+                />
+              ))}
           </aside>
         </main>
       </div>
