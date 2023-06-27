@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server server.json -w -d 1000"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -31,7 +30,6 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "json-server": "^0.17.3",
     "postcss": "^8.4.24",
     "tailwind-scrollbar": "^3.0.4",
     "tailwindcss": "^3.3.2",
