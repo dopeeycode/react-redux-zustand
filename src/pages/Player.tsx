@@ -2,11 +2,19 @@ import Header from '../components/Header'
 import VideoPlayer from '../components/Video'
 import Module from '../components/Module'
 import { UseAppSelector } from '../store'
+import { useCurrentLesson } from '../store/slices/player'
+import { useEffect } from 'react'
 
 export default function Player() {
   const modules = UseAppSelector((state) => {
     return state.player.course.modules
   })
+
+  const { currentLesson } = useCurrentLesson()
+
+  useEffect(() => {
+    document.title = `${currentLesson.title}`
+  }, [currentLesson])
 
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex justify-center items-center">
