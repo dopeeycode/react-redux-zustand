@@ -1,9 +1,9 @@
-import { CircleIcon } from 'lucide-react'
+import { CircleDashed } from 'lucide-react'
 
 export default function Loading() {
   return (
     <div className="w-6 h-6 flex items-center justify-center overflow-hidden">
-      <CircleIcon className="w-4 h-4 animate-spin" />
+      <CircleDashed className="w-5 h-5 animate-spin" />
     </div>
   )
 }

@@ -36,7 +36,7 @@ export default function ScreenshotButton({
           backgroundSize: 140,
         }}
       >
-        <Trash size={17} onClick={() => onScreenshotTook(null)} />
+        <Trash size={18} onClick={() => onScreenshotTook(null)} />
       </button>
     )
   }
