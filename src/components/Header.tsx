@@ -1,12 +1,11 @@
-import { useCurrentLesson } from '../store/slices/player'
-import { UseAppSelector } from '../store'
 import { Feedback } from './FeedbackWidget'
+import { useStore, useCurrentLesson } from '../zustand-store'
 
 export default function Header() {
-  const { currentLesson, currentModule } = useCurrentLesson()
-  const isCourseLoading = UseAppSelector((state) => state.player.isLoading)
+  const { isLoading } = useStore()
 
-  if (isCourseLoading) {
+  const { currentLesson, currentModule } = useCurrentLesson()
+  if (isLoading) {
     return <h1 className="text-2xl text-zinc-400 animate-bounce">Aguarde...</h1>
   }
 
